@@ -11,7 +11,7 @@
             /* box-sizing: border-box; */
         }
         body{
-            height: 500px;
+            height: 800px;
             
             overflow: hidden;
             background-color: rgb(255,255,255);
@@ -22,7 +22,7 @@
 
             width : 850px;
 
-            top: 70px;
+            top: 130px;
             left: 50%;
             transform: translateX(-50%);
 
@@ -58,7 +58,7 @@
             display: inline-block;
 
             left: 50%;
-            top: 90px;
+            top: 150px;
             transform: translateX(-50%);
             color: white;
             font-weight: bold;
@@ -71,7 +71,7 @@
             transform: translateX(-50%);
             transition: 0.8s;
 
-            top: 130px;
+            top: 200px;
             width: 330px;
             height: 270px;
             padding: 20px 30px 20px 30px;
@@ -91,9 +91,12 @@
         .mini_box{
             position: absolute;
             display: block;
+
+            left: 50%;
+            top : 10px;
+
             width: 330px;
             height: 100%;
-            left: 50%;
             transform: translateX(-50%);
         }
         input{
@@ -108,13 +111,13 @@
             height: 20px;
 
             size: 2;
-            border: 2px solid black;
+            border: 3px solid black;
             border-radius: 30%;
         }
         .age:hover {
             color:white;
             box-shadow: 0px 3px 15px 1px grey;
-            border: 2px solid white;
+            border: 3px solid white;
 
             transition: 0.2s;
         }
@@ -134,23 +137,63 @@
         }
         .healty_label{
             position: relative;
-            top: -17px;
+            top: -11px;
         }
         .helthy{
             margin-top: 20px;
-            width: 155px;
-            height: 50px;
+            width: 145px;
+            height: 43px;
+
+            padding: 4px 0px 0px 7px;
+
+            overflow: hidden;
+            
+            border: 2px solid black;
+            border-radius: 12px;
+            line-height: 5px;
+            font-weight: bold;
+            font-size: 12px;
         }
         .button_box{
             width: 100%;
-            margin-top: 10px;
+            margin-top: 18px;
             height: 60px;
         }
-        button ,#submit_button{
+        button {
             position: absolute;
 
             margin-top: 22px;
             left: 50%;
+            transform: translateX(-50%);
+            padding: 5px 6px 5px 6px;
+
+            border-radius: 5px;
+            background-color: black;
+            color: white;
+            font-weight: bold;
+
+            transition: 0.2s;
+        }
+        #submit_button {
+            position: absolute;
+
+            margin-top: 22px;
+            left: 39%;
+            transform: translateX(-50%);
+            padding: 5px 13px 5px 13px;
+
+            border-radius: 5px;
+            background-color: black;
+            color: white;
+            font-weight: bold;
+
+            transition: 0.2s;
+        }
+        #re-record{
+            position: absolute;
+            display: none;
+            margin-top: 22px;
+            left: 60%;
             transform: translateX(-50%);
             padding: 5px 6px 5px 6px;
 
@@ -171,7 +214,7 @@
             
             margin-right: 5px;
             left: 125px;
-            bottom : 90px;
+            bottom : 88px;
 
             width: 7px;
             height: 7px;
@@ -206,7 +249,7 @@
             display: none;
         }
         
-        button:hover, #submit_button:hover {
+        button:hover, #submit_button:hover, #re-record:hover {
             background-color: white;
             transition: 0.2s;
             color:black;
@@ -246,7 +289,7 @@
 
 <body>
     <form name = "audio_submit", method="post", action = "", onsubmit="return check()">
-       <img id = "mask" src="./img/mask2.png" alt="mask">
+       <img id = "mask" src="{{url_for('static',filename=mask)}}" alt="mask">
         <h3 class =  "title">Covid-19 확진판별</h3>
         <div id = "main_Box">
                 <div id = record_box>
@@ -257,7 +300,7 @@
                             <label class= "gender_label"><b>여자</b></label><input type = "radio", name = "gender", class ="gender", value = "female">
                         </div>
                         <label for="helthy" class = "healty_label"><b>증상</b></label>
-                        <select name="helthy" class="helthy", multiple = "multiple" >
+                        <select id = "healty" name="healty" class="helthy" multiple = "multiple">
                             <option value="respiratory_condition">호흡기 질환 있음</option>
                             <option value="fever_muscle_pain">발열 혹은 근육통 있음</option>
                         </select>
@@ -266,6 +309,7 @@
                             <button id="record">녹음</button>
                             <button id="stop">정지</button>
                             <input type="submit" id = "submit_button", value = "확인">
+                            <button id="re-record">재녹음</button>
                         </div>
                     </div>
                 <div id="sound-clips"></div>
@@ -277,23 +321,32 @@
         const mask = document.getElementById("mask")
         // const maskButton = document.getElementById("mask_button")
         const main_Box = document.getElementById("main_Box")
-        const record = document.getElementById("record")
         const dot = document.getElementById("dot")
+        const record = document.getElementById("record")
         const stop = document.getElementById("stop")
         const subm = document.getElementById("submit_button")
+        const rerecord = document.getElementById("re-record")
         const soundClips = document.getElementById("sound-clips")
         const audioCtx = new(window.AudioContext || window.webkitAudioContext)() // 오디오 컨텍스트 정의
         const analyser = audioCtx.createAnalyser()
             //    const distortion = audioCtx.createWaveShaper()
             //    const gainNode = audioCtx.createGain()
             //    const biquadFilter = audioCtx.createBiquadFilter()
-        let h = 200
 
-        
+        function ran(){   // 마스크 날라가는 랜덤 난수 생성..... 그냥 재밌어서 만든거
+                var r = Math.floor((Math.random() * -250)) + 125;
+                if(r > -100 && r < 100){
+                    r = ran();
+                } 
+                return r;
+        } 
+
+
         mask.onclick = () => {
             mask.style.opacity = "0"
-            mask.style.transform = "rotateZ(90deg) rotateY(90deg) "
-            mask.style.left = "80%"
+            // mask.style.transform = "rotateZ(90deg) rotateY(90deg) "
+            mask.style.left = String(ran()) + "%"
+            mask.style.width = "50%"
             main_Box.style.display = "block"
             document.getElementsByTagName("body")[0].style.backgroundColor = "black"
         }
@@ -356,7 +409,6 @@
                         console.log(mediaRecorder.state)
                         console.log("recorder started")
                         record.style.display = "none"
-                        record.style.boxShadow = "100px 200px 300px 200px gray" 
                         record.style.display = "none"
                         // main_Box.style.backgroundColor = "rgb(255,222,255)"
                         // main_Box.style.backgroundColor = "red"
@@ -373,25 +425,37 @@
                         console.log("recorder stopped")
                         record.style.background = ""
                         record.style.color = ""
-                        h = h + 150
+                        main_Box.style.height = "350px"
                         subm.style.display = "block"
+                        rerecord.style.display = "block"
                         // subm.style.backgroundColor = "rgb(139,188,255)"
                         // main_Box.style.backgroundColor = "rgb(222,255,255)"
                         stop.style.display = "none"
                         dot.style.display = "none"
-                        main_Box.style.height = String(h) + "px"
                         soundClips.style.display = "block"
                         soundClips.style.bottom = "60px"
                     }
-
+                    rerecord.onclick = e => {
+                        e.preventDefault()
+                        record.style.display = "block"
+                        rerecord.style.display = "none"
+                        subm.style.display = "none"
+                        soundClips.removeChild(document.getElementsByClassName("clip")[0])
+                        soundClips.style.display = "none"
+                        main_Box.style.height = "270px"
+                        delete audio
+                    }
+                    
+                    
                     mediaRecorder.onstop = e => {
                         console.log("data available after MediaRecorder.stop() called.")
 
-                        // const clipName = "음성파일 이름"
-                        
+
+                        const audio = document.createElement('audio')
+                        const audio_src = document.createElement('input')
+                        // const clipName = "음성파일 이름" 
                         const clipContainer = document.createElement('div')
                         // const clipLabel = document.createElement('p')
-                        const audio = document.createElement('audio')
                         const deleteButton = document.createElement('button')
 
                         
@@ -413,9 +477,13 @@
                         const blob = new Blob(chunks, {
                             'type': 'audio/wav codecs=opus'
                         })
-                        // chunks = []  // 오디오 데이터 초기화인데, 녹음 한번만 할것이기 때문에 필요없다
+                        chunks = []  // 오디오 데이터 초기화인데
                         const audioURL = URL.createObjectURL(blob)  // audioURL 이 url로 들어가면 오디오 파일 있음
                         audio.src = audioURL // audioURL로 audio객체에 데이터 설정
+                        audio_src.type = "hidden"
+                        audio_src.name = "audio_src"
+                        audio_src.value = audioURL
+                        soundClips.appendChild(audio_src)
                         console.log("recorder stopped")
                         // audio.play() // 자동 실행 코드
                         
@@ -426,6 +494,7 @@
                         //     main_Box.style.height = String(h) + "px"
                         // }
                     }
+                    
 
                     mediaRecorder.ondataavailable = e => {
                         chunks.push(e.data)
@@ -434,6 +503,7 @@
                 .catch(err => {
                     console.log('The following error occurred: ' + err)
                 })
+
         }
     </script>
 </body></html>
