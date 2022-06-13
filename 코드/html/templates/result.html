@@ -5,16 +5,175 @@
     <meta charset="UTF-8">
     <title>Covid-19 확진 판별</title>
     <style>
+        *{
+            margin:0px;
+            padding:0px;
+            text-decoration: none;
+            list-style: none;
+            box-sizing: border-box;
+        }
         body{
             background-color: black;
+        }
+        #main_box{
+            position: absolute;
+
+            top: 50px;
+            left: 50%;
+            transform: translateX(-50%);
+
+            background-color: #d9d9d9;
+            width: 800px;
+            height: 1500px;
+        }
+        #img_box{
+            background-color: aqua;
+
+            width: 780px;
+            margin: 10px 10px 10px 10px;
+            height: 450px;
+        }
+        #text_box{
+            position: relative;
+
+            margin-top: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+
+            width: 300px;
+            height: 200px;
+
+            background-color: aquamarine;
+        }
+        #show_box{
+            position: relative;
+            display: flex;
+            flex-wrap: nowrap;
+            flex-direction: row;
+            justify-content: space-between;
+            justify-items: flex-start;
+
+            background-color: rgb(166, 243, 243);
+
+            width: 780px;
+            height: 250px;
+        }
+        #show_box div{
+            width: 350px;
+            height: 250px;
+        }
+        #show_box div img {
+            position: relative;
+
+            width: 300px;
+            height: 200px;
+            top: 10px;
+            left: 25px;
+        }
+        #show_box div span{
+            position: relative;
+            display: block;
+            width: 30px;
+            height: 30px;
+            
+            top: 10px;
+            left: 160px;
+        }
+        #audio_box{
+            position: relative;
+            
+            margin-top: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+
+            display: flex;
+            flex-wrap: nowrap;
+            flex-direction: row;
+            justify-content: space-between;
+            justify-items: flex-start;
+
+            width: 780px;
+            height: 150px;
+
+            background-color: blueviolet;
+        }
+        .small_audio_box{
+            margin: 0px 20px 0px 20px;
+            width: 300px;
+            height: 150px;
+            background-color: aqua;
+        }
+        .small_audio_box audio {
+            margin-top: 50px;
+        }
+        .small_audio_box span{
+            position: relative;
+            display: block;
+
+            margin-top: 5px;
+            width: 100%;
+
+            text-align: center;
         }
     </style>
 </head>
 
 <body>
-    
+    <div id="main_box">
+        <div id="img_box">
+            <div id = "text_box">
+                <p><b>연령대</b></p>
+                <p><b>성별</b></p>
+                <p><b>확진여부</b></p>
+                <p><b>양성 확률</b></p>
+                {% if test_pred %}
+                <p><b>실제 양/음성여부</b></p>
+                <p><b>모델 데이터</b></p>
+                {% endif %}
+                <p><b>양성 확률</b></p>
+            </div>
+            <div id = "show_box">
+                <div id="wav_box">
+                    <!-- <img src="{{url_for('static',filename=wav_img)}}" alt="wav"> -->
+                    <img src="C:/Users/CJ/Desktop/MultiCampus/프로젝트_2_ai서비스 개발/html/static/img/cat.jpg" alt="">
+                    <span><strong>wav</strong></span>
+                </div>
+                <div id="mfcc_box">
+                    <!-- <img src="{{url_for('static',filename=wav_img)}}" alt="mfcc"> -->
+                    <img src="C:/Users/CJ/Desktop/MultiCampus/프로젝트_2_ai서비스 개발/html/static/img/cat.jpg" alt="">
+                    <span><strong>mfcc</strong></span>
+
+                </div>
+            </div>
+        </div>
+        <div id = "audio_box">
+            <div class="small_audio_box">
+                <audio src="{{url_for('static', filename = audio_1)}}" controls ="true" ></audio>
+                <span><strong>Argmentation version 1</strong></span>
+            </div>
+            <div class="small_audio_box">
+                <audio src="{{url_for('static', filename = audio_1)}}" controls ="true"></audio>
+                <span><strong>Argmentation version 2</strong></span>
+            </div>
+        </div>
+        <div id = "audio_box">
+            <div class="small_audio_box">
+                <audio src="{{url_for('static', filename = audio_1)}}" controls ="true" ></audio>
+                <span><strong>Argmentation version 3</strong></span>
+            </div>
+            <div class="small_audio_box">
+                <audio src="{{url_for('static', filename = audio_1)}}" controls ="true"></audio>
+                <span><strong>Argmentation version 4</strong></span>
+            </div>
+        </div>
+
+    </div>
+
+
+
+
     <script>
-        alert("나이 : " + {{age}} + "살")
       
     </script>
-</body></html>
+</body>
+</html>
