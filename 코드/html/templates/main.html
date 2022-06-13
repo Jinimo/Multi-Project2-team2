@@ -288,7 +288,7 @@
 </head>
 
 <body>
-    <form name = "audio_submit", method="post", action = "", onsubmit="return check()">
+    <form name = "audio_submit", method="post", action = "./result", onsubmit="return check()">
        <img id = "mask" src="{{url_for('static',filename=mask)}}" alt="mask">
         <h3 class =  "title">Covid-19 확진판별</h3>
         <div id = "main_Box">
@@ -474,11 +474,40 @@
                         // var height_length = document.getElementsByClassName("clip").length
 
                         audio.controls = true
-                        const blob = new Blob(chunks, {
+                        const blob1 = new Blob(chunks, {
+                            'type': 'audio/webm codecs=opus'
+                        })
+                        const blob2 = new Blob(chunks, {
                             'type': 'audio/wav codecs=opus'
                         })
+
+                        // 오디오 데이터 post
+                        const xhr = new XMLHttpRequest()
+                        const formData = new FormData() 
+                        formData.append("audio_blob", blob2)
+
+                        xhr.open("POST", "/set");
+                        xhr.setRequestHeader('Content-Type', 'multipart/form-data');
+                        xhr.addEventListener('readystatechange', function (event) {
+                            const { target } = event;
+
+                            if (target.readyState === XMLHttpRequest.DONE) {
+                                const { status } = target;
+
+                                if (status === 0 || (status >= 200 && status < 400)) {
+                                    // 요청이 정상적으로 처리 된 경우
+                                } else {
+                                    // 에러가 발생한 경우
+                                }
+                            }
+                        })
+
+                        xhr.send(formData);
+
+
+
                         chunks = []  // 오디오 데이터 초기화인데
-                        const audioURL = URL.createObjectURL(blob)  // audioURL 이 url로 들어가면 오디오 파일 있음
+                        const audioURL = URL.createObjectURL(blob2)  // audioURL 이 url로 들어가면 오디오 파일 있음
                         audio.src = audioURL // audioURL로 audio객체에 데이터 설정
                         audio_src.type = "hidden"
                         audio_src.name = "audio_src"
