@@ -194,7 +194,7 @@
         <div id = "main_Box">
             <form name = "audio_submit", method="post", action = "./result", onsubmit="return check()">
             <div class="mini_box">
-                <p class="info_p">테스트 데이터 번호를 입력하세요. (총 n개)</p>
+                <p class="info_p">테스트 데이터 번호를 입력하세요. (총 521개)</p>
                 <input type="number" class = "test_number"  oninput="maxCheck(this)" name="test_number">
                 <input type="submit" class= "subm" value="확인">
             </div>
@@ -215,7 +215,7 @@
         return number % 1 === 0;
         }
         function maxCheck(object){
-            var max = 100
+            var max = 500
             if (object.value > max){
                 object.value = max;
             }
