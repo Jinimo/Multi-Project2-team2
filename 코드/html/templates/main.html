@@ -118,7 +118,7 @@
             border-radius: 30%;
         }
         .age:hover {
-            background-color: #d9d9d9;
+            background-color: white;
 
             box-shadow: 0px 3px 15px 1px grey;
 
@@ -253,7 +253,7 @@
         }
         
         button:hover, #submit_button:hover, #re-record:hover {
-            background-color: #d9d9d9;
+            background-color: white;
             transition: 0.2s;
             color:black;
             box-shadow: 0px 3px 15px 1px grey;
@@ -331,7 +331,7 @@
             <li><a href="./selectNum">테스트 데이터</a></li>
         </ol>
     </div>
-    <form name = "audio_submit", method="post", action = "./result", onsubmit="return check()">
+    <form id="submit_form" name = "audio_submit", method="post", action = "./result", onsubmit="return check()">
        <img id = "mask" src="{{url_for('static',filename=mask)}}" alt="mask">
         <h3 class =  "title">Covid-19 확진판별</h3>
         <div id = "main_Box">
@@ -361,6 +361,7 @@
     </form>
     <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
     <script>
+        const sub_form = document.getElementById("submit_form")
         const mask = document.getElementById("mask")
         // const maskButton = document.getElementById("mask_button")
         const main_Box = document.getElementById("main_Box")
@@ -511,6 +512,11 @@
                             processData:false,
                             success: function(result){
                                 console.log("success", result)
+                                const cnt = document.createElement('input')
+                                cnt.value = result
+                                cnt.type = "hidden"
+                                cnt.name = "cnt"
+                                sub_form.appendChild(cnt)
                             },
                             error: function(result){
                                 alert("failed")
