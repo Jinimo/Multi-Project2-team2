@@ -483,7 +483,6 @@
                         console.log("data available after MediaRecorder.stop() called.")
 
                         const audio = document.createElement('audio')
-                        const audio_src = document.createElement('input')
                         const clipContainer = document.createElement('div')
                         const deleteButton = document.createElement('button')
 
@@ -522,7 +521,6 @@
                         const audioURL = URL.createObjectURL(blob)  // audioURL 이 url로 들어가면 오디오 파일 있음
                         audio.src = audioURL // audioURL로 audio객체에 데이터 설정
                        
-                        soundClips.appendChild(audio_src)
                         console.log("recorder stopped")
                         
                     }
