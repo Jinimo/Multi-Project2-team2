@@ -31,7 +31,7 @@
 
             width: 780px;
             margin: 10px 10px 10px 10px;
-            height: 450px;
+            height: 480px;
         }
         #text_box{
             position: relative;
@@ -56,7 +56,7 @@
             background-color: rgb(166, 243, 243);
 
             width: 780px;
-            height: 250px;
+            height: 280px;
         }
         #show_box div{
             width: 350px;
@@ -95,13 +95,13 @@
             width: 780px;
             height: 150px;
 
-            background-color: blueviolet;
+            /* background-color: blueviolet; */
         }
         .small_audio_box{
             margin: 0px 20px 0px 20px;
             width: 300px;
             height: 150px;
-            background-color: aqua;
+            /* background-color: aqua; */
         }
         .small_audio_box audio {
             margin-top: 50px;
@@ -122,25 +122,24 @@
     <div id="main_box">
         <div id="img_box">
             <div id = "text_box">
-                <p><b>연령대</b></p>
-                <p><b>성별</b></p>
-                <p><b>확진여부</b></p>
-                <p><b>양성 확률</b></p>
+                <p><b>연령대 : {{age}}</b></p>
+                <p><b>성별 : {{gender}}</b></p>
+                <p><b>증상 : {{healthy}}</b></p>
+                <p><b>모델 예측 결과 : {{yhat}}</b></p>
+                <p><b>모델 예측 양성 확률 : {{pred}}</b></p>
                 {% if test_pred %}
                 <p><b>실제 양/음성여부</b></p>
-                <p><b>모델 데이터</b></p>
                 {% endif %}
-                <p><b>양성 확률</b></p>
             </div>
             <div id = "show_box">
                 <div id="wav_box">
+                    <img src="../static/img/wav/signal.png" alt="wav">
                     <!-- <img src="{{url_for('static',filename=wav_img)}}" alt="wav"> -->
-                    <img src="C:/Users/CJ/Desktop/MultiCampus/프로젝트_2_ai서비스 개발/html/static/img/cat.jpg" alt="">
                     <span><strong>wav</strong></span>
                 </div>
                 <div id="mfcc_box">
-                    <!-- <img src="{{url_for('static',filename=wav_img)}}" alt="mfcc"> -->
-                    <img src="C:/Users/CJ/Desktop/MultiCampus/프로젝트_2_ai서비스 개발/html/static/img/cat.jpg" alt="">
+                    <img src="../static/img/mfcc/mfcc.png" alt="wav">
+                    <!-- <img src="{{url_for('static',filename=mfcc_img)}}" alt="mfcc"> -->
                     <span><strong>mfcc</strong></span>
 
                 </div>
@@ -148,22 +147,22 @@
         </div>
         <div id = "audio_box">
             <div class="small_audio_box">
-                <audio src="{{url_for('static', filename = audio_1)}}" controls ="true" ></audio>
-                <span><strong>Argmentation version 1</strong></span>
+                <audio src="{{url_for('static', filename = audio_or)}}" controls ="true" ></audio>
+                <span><strong>Original</strong></span>
             </div>
             <div class="small_audio_box">
                 <audio src="{{url_for('static', filename = audio_1)}}" controls ="true"></audio>
-                <span><strong>Argmentation version 2</strong></span>
+                <span><strong>Argmentation version 1</strong></span>
             </div>
         </div>
         <div id = "audio_box">
             <div class="small_audio_box">
-                <audio src="{{url_for('static', filename = audio_1)}}" controls ="true" ></audio>
-                <span><strong>Argmentation version 3</strong></span>
+                <audio src="{{url_for('static', filename = audio_2)}}" controls ="true" ></audio>
+                <span><strong>Argmentation version 2</strong></span>
             </div>
             <div class="small_audio_box">
-                <audio src="{{url_for('static', filename = audio_1)}}" controls ="true"></audio>
-                <span><strong>Argmentation version 4</strong></span>
+                <audio src="{{url_for('static', filename = audio_3)}}" controls ="true"></audio>
+                <span><strong>Argmentation version 3</strong></span>
             </div>
         </div>
 
