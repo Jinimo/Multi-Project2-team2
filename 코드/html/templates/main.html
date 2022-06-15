@@ -321,6 +321,24 @@
         #list_div ol li:nth-child(2){
             bottom: 0;
         }
+        #floor{
+            position: absolute;
+
+            bottom:0px;
+            left: 50%;
+            transform: translateX(-50%);
+
+            padding-top: 3px;
+            padding-bottom: 20px;
+            width:80%;
+            height: 40px;
+
+            border-top: 1px solid rgb(96, 96, 96); 
+        }
+        #floor strong{
+            font-size: 13px;
+            color: rgb(96, 96, 96);
+        }
     </style>
 </head>
 
@@ -359,6 +377,9 @@
             </div>
         </div>
     </form>
+    <nav id="floor"><strong>Copyright 2022. Rolling in the Deeplearning All rights reserved</strong></nav>
+
+
     <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
     <script>
         const sub_form = document.getElementById("submit_form")

@@ -13,6 +13,12 @@
             box-sizing: border-box;
             z-index: 0;
         }
+        body{
+            background-color: black;
+            height:1300px;
+            min-height : 100%;
+        }
+        
         #title{
             position: absolute;
             display: inline-block;
@@ -46,10 +52,6 @@
         }
         #to_main a {
             color: black;
-        }
-        body{
-            background-color: black;
-            height: 1100px;
         }
         #main_box{
             position: absolute;
@@ -218,86 +220,115 @@
             font-weight: bold;
             line-height: 28px;
         }
+        
+        #floor strong{
+            font-size: 13px;
+            color: rgb(96, 96, 96);
+        }
+        #body_wrapper {
+            min-height: 100%;
+            position: relative;
+        }
+        #content_wrapper {
+            /* margin-top: 100px; */
+            height: auto; 
+        }
+        #floor{
+            position: absolute;
+
+            bottom:0px;
+            left: 50%;
+            transform: translateX(-50%);
+
+            padding-top: 3px;
+            padding-bottom: 40px;
+            width:80%;
+
+            border-top: 1px solid rgb(96, 96, 96); 
+        }
     </style>
 </head>
 
 <body>
-    {% if index %}
-    <h3 id="title"><strong>Data No.{{index}} Specification</strong></h3> -->
-    {% else %}
-    <h3 id="title"><strong>Specification</strong></h3>
-    {% endif %}
-    <span id= "to_main"><a href = "/"><strong>메인</strong></a></span>
-    <div id="main_box">
-        <div id="img_box">
-            <div id ="text_box_wrap">
-                <div class = "text_box">
-                    {% if real_y %}
-                    <div class = "text_mini_box test">
-                    {% else %}
-                    <div class = "text_mini_box">
-                    {% endif %}
-                        {% if yhat == "양성" %}
-                        <p><b>모델 예측 결과 : <strong  class="red">양성</strong></b></p>
-                        {% else %}
-                        <p><b>모델 예측 결과 : <strong  class="blue">음성</strong></b></p>
-                        {% endif %}
-
-                        {% if real_y %}
-                            {% if real_y == "양성" %}
-                            <p><b>실제 양/음성 라벨 : <strong  class="red">양성</strong></b></p>
+    <div id = "body_wrapper">
+        <div id = "content_wrapper">
+            {% if index %}
+            <h3 id="title"><strong>Data No.{{index}} Specification</strong></h3> -->
+            {% else %}
+            <h3 id="title"><strong>Specification</strong></h3>
+            {% endif %}
+            <span id= "to_main"><a href = "/"><strong>메인</strong></a></span>
+            <div id="main_box">
+                <div id="img_box">
+                    <div id ="text_box_wrap">
+                        <div class = "text_box">
+                            {% if real_y %}
+                            <div class = "text_mini_box test">
                             {% else %}
-                            <p><b>실제 양/음성 라벨 : <strong  class="blue">음성</strong></b></p>
-                            {% endif %} 
-                        {% endif %} 
+                            <div class = "text_mini_box">
+                            {% endif %}
+                                {% if yhat == "양성" %}
+                                <p><b>모델 예측 결과 : <strong  class="red">양성</strong></b></p>
+                                {% else %}
+                                <p><b>모델 예측 결과 : <strong  class="blue">음성</strong></b></p>
+                                {% endif %}
+
+                                {% if real_y %}
+                                    {% if real_y == "양성" %}
+                                    <p><b>실제 양/음성 라벨 : <strong  class="red">양성</strong></b></p>
+                                    {% else %}
+                                    <p><b>실제 양/음성 라벨 : <strong  class="blue">음성</strong></b></p>
+                                    {% endif %} 
+                                {% endif %} 
+                            </div>
+                        </div>
+                        <div class = "text_box">
+                            <div class = "text_mini_box">
+                                <p><b>연령대 : {{age}}</b></p>
+                                <p><b>성별 : {{gender}}</b></p>
+                                <p><b>호흡기질환 : {{healthy1}}</b></p>
+                                <p><b>근육통 혹은 열 : {{healthy2}}</b></p>
+                                <p><b>모델 예측 양성 확률 : {{pred}}</b></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div id = "show_box">
+                        <div id="wav_box">
+                            <img src="{{url_for('static',filename=wav_img)}}" alt="wav">
+                            <span><strong>wav</strong></span>
+                        </div>
+                        <div id="mfcc_box">
+                            <img src="{{url_for('static',filename=mfcc_img)}}" alt="mfcc">
+                            <span><strong>mfcc</strong></span>
+
+                        </div>
                     </div>
                 </div>
-                <div class = "text_box">
-                    <div class = "text_mini_box">
-                        <p><b>연령대 : {{age}}</b></p>
-                        <p><b>성별 : {{gender}}</b></p>
-                        <p><b>호흡기질환 : {{healthy1}}</b></p>
-                        <p><b>근육통 혹은 열 : {{healthy2}}</b></p>
-                        <p><b>모델 예측 양성 확률 : {{pred}}</b></p>
+                <div id = "audio_box">
+                    <div class="small_audio_box">
+                        <audio src="{{url_for('static', filename = audio_or)}}" controls ="true" ></audio>
+                        <span><strong>Original</strong></span>
+                    </div>
+                    <div class="small_audio_box">
+                        <audio src="{{url_for('static', filename = audio_1)}}" controls ="true"></audio>
+                        <span><strong>Argmentation version 1</strong></span>
                     </div>
                 </div>
-            </div>
-            <div id = "show_box">
-                <div id="wav_box">
-                    <img src="{{url_for('static',filename=wav_img)}}" alt="wav">
-                    <span><strong>wav</strong></span>
+                <div id = "audio_box">
+                    <div class="small_audio_box">
+                        <audio src="{{url_for('static', filename = audio_2)}}" controls ="true" ></audio>
+                        <span><strong>Argmentation version 2</strong></span>
+                    </div>
+                    <div class="small_audio_box">
+                        <audio src="{{url_for('static', filename = audio_3)}}" controls ="true"></audio>
+                        <span><strong>Argmentation version 3</strong></span>
+                    </div>
                 </div>
-                <div id="mfcc_box">
-                    <img src="{{url_for('static',filename=mfcc_img)}}" alt="mfcc">
-                    <span><strong>mfcc</strong></span>
 
-                </div>
             </div>
         </div>
-        <div id = "audio_box">
-            <div class="small_audio_box">
-                <audio src="{{url_for('static', filename = audio_or)}}" controls ="true" ></audio>
-                <span><strong>Original</strong></span>
-            </div>
-            <div class="small_audio_box">
-                <audio src="{{url_for('static', filename = audio_1)}}" controls ="true"></audio>
-                <span><strong>Argmentation version 1</strong></span>
-            </div>
-        </div>
-        <div id = "audio_box">
-            <div class="small_audio_box">
-                <audio src="{{url_for('static', filename = audio_2)}}" controls ="true" ></audio>
-                <span><strong>Argmentation version 2</strong></span>
-            </div>
-            <div class="small_audio_box">
-                <audio src="{{url_for('static', filename = audio_3)}}" controls ="true"></audio>
-                <span><strong>Argmentation version 3</strong></span>
-            </div>
-        </div>
-
+        <footer id="floor"><strong>Copyright 2022. Rolling in the Deeplearning All rights reserved</strong></footer>
     </div>
-
-
 
 
     <script>
