@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Loading...</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            text-decoration: none;
+            list-style: none;
+            /* box-sizing: border-box; */
+        }
+        body{
+            height: 800px;
+            
+            overflow: hidden;
+            background-color: rgb(0,0,0);
+            transition: 2s;
+            z-index: 0;
+        }
+        
+        #main_box{
+            left: -40%;
+            position: absolute;
+            width: 300px;
+            height: 100px;
+            animation-name: mainbox_moving;
+            animation-duration: 6s;
+            animation-fill-mode: forwards;
+            animation-iteration-count: infinite;
+            animation-direction: alternate;
+            animation-timing-function: linear;
+        }
+        @keyframes mainbox_moving{
+            0%{
+
+            }
+            100%{
+                left: 100%;
+            }
+        }
+        #loading_box{
+            position: absolute;
+            width: 300px;
+            height: 100px;
+        }
+        #loading_box strong{
+            position: absolute;
+            margin-top: 120px;
+            color: #d9d9d9;
+            font-size: 100px;
+            animation-name: loading_moving;
+            animation-duration: 2.5s;
+            animation-delay: 0.1s;
+            animation-fill-mode: forwards;
+            animation-iteration-count: infinite;
+            animation-direction: alternate-reverse;
+            animation-timing-function: ease-in-out;
+
+        }
+        @keyframes loading_moving{
+            0%{
+
+            }
+            65%{
+                transform: rotateX(180deg);
+            }
+            100%{
+                transform: rotateX(0deg);
+            }
+        }
+        
+    </style>
+</head>
+
+<body>
+    <div id="main_box">
+            <div id="loading_box">
+                <strong>Loading...</strong>
+                <div class="spinner-border ml-auto" role="" aria-hidden=""></div>
+            </div>
+    </div>
+    <form style="display: none" action="/result" method="POST" id="form_next">
+        <input type="hidden" name="age" value="{{age}}"/>
+        <input type="hidden" name="gender" value="{{gender}}"/>
+        <input type="hidden" name="healthy" value="{{healthy}}"/>
+        <input type="hidden" name="cnt" value="{{cnt}}"/>
+    </form>
+        
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+    <script>
+        window.onload = function(){
+            $("#form_next").submit()
+        }
+        
+    </script>
+</body></html>
