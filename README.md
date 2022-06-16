@@ -102,6 +102,6 @@
 
 ## 모델의 score
 
-![](README.assets/2022-06-16-10-19-25.png)
+![](README.assets/캡처.JPG)
 
 ![](README.assets/2022-06-16-10-20-28.png)
