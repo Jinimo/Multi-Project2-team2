@@ -93,15 +93,14 @@
 **김현진** (팀원): 깃허브 관리, 모델링
 
 
-
 # 📌 프로젝트 결과
 
 ## 사용된 모델
 
-![사용된 모델](README.assets/다운로드.png)
+<img src="README.assets/다운로드.png" width="300" height="400">
 
 ## 모델의 score
 
-![](README.assets/캡처.JPG)
+<img src="README.assets/캡처.JPG" width="500" height="300">
 
-![](README.assets/2022-06-16-10-20-28.png)
+
