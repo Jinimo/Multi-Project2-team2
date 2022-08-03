@@ -47,6 +47,7 @@
 
 + 2-5. test data에 대해서도 train data 전처리 과정과 동일한 과정을 거쳐 데이터 가공 후 가공된 데이터를 이용하여 모델 평가
 
+<p align="center"><img src="README.assets/project2_flask.jpg" width="600" height="400">
 
 
 ### 3. 플라스크 구현 및 서비스 환경 구축 
@@ -54,17 +55,10 @@
 > flask를 이용해 사용자가 기침소리를 녹음해 양성/음성 여부를 판별하거나 이미 저장되어 있는 데이터셋의 결과를 확인해보는 기능을 구현 및 시연
 
 + 3-1. 직접 기침소리를 녹음한 파일을 활용하여 양성 음성 판별 여부 확인 가능한 페이지 
-![](README.assets/2022-06-16-09-55-54.png)
-![](README.assets/2022-06-16-10-12-21.png)
-![](README.assets/테스트_양성.png)
 
 + 3-2. 임의의 테스트 데이터를 선택하여 양성 음성 판별 여부 확인 가능한 페이지
-![](README.assets/2022-06-16-09-56-53.png)
-![](README.assets/데이터_음성2.png)
-![](README.assets/데이터_양성.png)
 
-
-<img src="README.assets/project2_flask.jpg" width="500" height="300">
+<p align="center"><img src="README.assets/project2_flask.jpg" width="600" height="400">
 
 
 
@@ -98,7 +92,7 @@
 
 ## 사용된 모델
 
-<img src="README.assets/다운로드.png" width="300" height="400">
+<p align="center"><img src="README.assets/다운로드.png" width="300" height="400">
 
 ## 모델의 score
 
