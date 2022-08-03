@@ -47,7 +47,7 @@
 
 + 2-5. test data에 대해서도 train data 전처리 과정과 동일한 과정을 거쳐 데이터 가공 후 가공된 데이터를 이용하여 모델 평가
 
-<p align="center"><img src="README.assets/project2_flask.jpg" width="600" height="400">
+<p align="center"><img src="README.assets/project2_모델설계.jpg" width="600" height="400">
 
 
 ### 3. 플라스크 구현 및 서비스 환경 구축 
