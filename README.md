@@ -64,6 +64,7 @@
 ![](README.assets/데이터_양성.png)
 
 
+<img src="README.assets/project2_flask.jpg" width="500" height="300">
 
 
 
